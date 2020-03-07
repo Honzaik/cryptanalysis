@@ -12,12 +12,12 @@ def decrypt(data, key):
 
 table1 = []
 
+#first pair
 m1 = 0x4
 c1 = encrypt(encrypt(m1, key1), key2)
 
 for i in range(16):
     table1.append(encrypt(m1, i))
-
 
 candidates = []
 
@@ -26,6 +26,7 @@ for i in range(16):
     keypair = [table1.index(decrypted), i]
     candidates.append(keypair)
 
+#we now have our candidate keys from first pair, lets check another one to narrow the set
 
 table2 = []
 
@@ -42,8 +43,6 @@ for i in range(16):
     keypair = [table2.index(decrypted), i]
     candidates2.append(keypair)
 
-print(candidates)
-print(candidates2)
 intersection = []
 for candidate in candidates:
     if candidate in candidates2:
@@ -51,6 +50,7 @@ for candidate in candidates:
 
 print(intersection) #2 candidate key pairs
 
+#we now have only 2 possible keys, lets check which one encrypts "properly"
 m3 = 0x6
 c3 = encrypt(encrypt(m3, key1), key2)
 print(c3)
