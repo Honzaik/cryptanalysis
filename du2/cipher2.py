@@ -1,0 +1,31 @@
+sbox = [0x6,0x4,0xc,0x5,0x0,0x7,0x2,0xe,0x1,0xf,0x3,0xd,0x8,0xa,0x9,0xb]
+inverseSbox = [0x4,0x8,0x6,0xa,0x1,0x3,0x0,0x5,0xc,0xe,0xd,0xf,0x2,0xb,0x7,0x9]
+
+def encrypt(vstup, key):
+	vystup = vstup ^ key[0]
+	vystup = sbox[vystup]
+	vystup = vystup ^ key[1]
+	vystup = sbox[vystup]
+	vystup = vystup ^ key[2]
+	return vystup
+
+secretKey = [0x5, 0x6, 0x2]
+
+pairs = []
+for i in range(16):
+	pairs.append([i,encrypt(i,secretKey)])
+
+
+uDiff = pairs[2][0] ^ pairs[2^0xf][0]
+print(pairs[2][0])
+print(pairs[(2^0xf)][0])
+
+candidateKeys = [0]*16
+
+for keyGuess in range(16):
+	for pair in range(16):
+		diff = inverseSbox[keyGuess ^ pairs[pair][1]] ^ inverseSbox[keyGuess ^ pairs[pair^0xf][1]]
+		if diff == 0xd:
+			candidateKeys[keyGuess] = candidateKeys[keyGuess] + 1
+
+print(candidateKeys) # key 0x2 works
