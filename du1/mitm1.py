@@ -48,14 +48,14 @@ for candidate in candidates:
     if candidate in candidates2:
         intersection.append(candidate)
 
-print(intersection) #2 candidate key pairs
+print('we have candicates: ' + str(intersection)) #2 candidate key pairs
 
 #we now have only 2 possible keys, lets check which one encrypts "properly"
 m3 = 0x6
 c3 = encrypt(encrypt(m3, key1), key2)
-print(c3)
-print(encrypt(encrypt(m3, intersection[0][0]), intersection[0][1]))
-print(encrypt(encrypt(m3, intersection[1][0]), intersection[1][1]))
+print('correct encryption: ' + str(c3))
+print('first candidate encryption: ' + str(encrypt(encrypt(m3, intersection[0][0]), intersection[0][1])))
+print('second candidate encryption ' + str(encrypt(encrypt(m3, intersection[1][0]), intersection[1][1])))
 
 print(str(intersection[0]) + ' is the correct key pair')
 
