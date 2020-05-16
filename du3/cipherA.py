@@ -10,7 +10,7 @@ def getBitParity(m): #calculates number of 1s in a "binary" vector
     return result
 
 alphaMask = 0b1001 #chosen mask alpha
-betaMask = 0b0010 #choen mask beta
+betaMask = 0b0010 #chosen mask beta
 
 secretKeys = [0x1, 0x2] #0b0001, 0b0010 -> 1 + 1 = 0
 print('we want to guess:', (getBitParity(alphaMask & secretKeys[0]) ^ getBitParity(betaMask & secretKeys[1]))) #the result of alpha x m + beta x c

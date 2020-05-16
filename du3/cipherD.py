@@ -39,12 +39,12 @@ def getBitParity(m): #calculates number of 1s in a "binary" vector
         result ^= (m >> i) & 0x1
     return result
 
-secretRoundKeys = [0x1b1b, 0xe2e2, 0x2354, 0xbf45, 0xfa45]; #secret round keys
+secretRoundKeys = [0x1b1b, 0xe2e2, 0x2354, 0xbf45, 0xba45]; #secret round keys chosen by random
 print('we want to guess first part of the k4 which is:', hex(secretRoundKeys[4]>>12))
 
-mask = 0x8000
+mask = 0x8000 #given to us in the book
 
-numberOfKnownMessagePairs = 64
+numberOfKnownMessagePairs = 64 #sufficiently large to give us just one candidate in most tries
 
 messagePairs = []
 for i in range(numberOfKnownMessagePairs): #calculates some message pairs
