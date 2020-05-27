@@ -95,7 +95,7 @@ for ivZ in range(0x20):
 
     corr = float(getNumberOfMatchingIndices(zStream, strToCompare)) / lengthToCheck
     if(corr > 0.65): #expected correlation is 6/8 = 0.75
-        print('z candidate:', ivZ)
+        print('z candidate:', ivZ, ' => z1,x2.., z5 = ', bin(ivZ)[2:][::-1])
 
 #bruteforce values for Y (128 values) and print candidates that match on > 65% of bits
 for ivY in range(0x80):
@@ -107,7 +107,7 @@ for ivY in range(0x80):
 
     corr = float(getNumberOfMatchingIndices(yStream, strToCompare)) / lengthToCheck
     if(corr > 0.65): #expected correlation is 6/8 = 0.75
-        print('y candidate:', ivY)
+        print('y candidate:', ivY, ' => y1,y2.., y7 = ', bin(ivY)[2:][::-1])
 
 #bruteforce values for X (2048 values) and print candidates that match on > 65% of bits
 for ivX in range(0x800):
@@ -119,41 +119,11 @@ for ivX in range(0x800):
 
     corr = float(getNumberOfMatchingIndices(xStream, strToCompare)) / lengthToCheck
     if(corr > 0.65): #expected correlation is 6/8 = 0.75
-        print('x candidate:', ivX)
+        print('x candidate:', ivX, ' => x1,x2.., x11 = ', bin(ivX)[2:][::-1])
 
 
-#results
+#results found by bruteforce for comparasion
 realXInt = 749
 realYInt = 59
 realZInt = 21
 
-
-#check for correctness
-setX(749)
-setY(59)
-setZ(21)
-
-Xcache = {}
-Ycache = {}
-Zcache = {}
-print(getFirstS(1000))
-print(outputS[:1000])
-
-'''
-#bruteforce
-for ivZ in range(0x20):
-    setZ(ivZ)
-    Zcache = {}
-    print(str(ivZ))
-    for ivY in range(0x80):
-        setY(ivY)
-        Ycache = {}
-        for ivX in range(0x800):
-            setX(ivX)
-            Xcache = {}
-            result = getFirstS(checkLength)
-            if result == strToCompare:
-                print('candidate: ivX: ' + str(ivX) + ', ivY: ' + str(ivY) + ', ivZ:' + str(ivZ))
-
-#candidate: ivX: 749, ivY: 59, ivZ:21
-'''
