@@ -36,29 +36,12 @@ def decryptFeistel(ciphertext, roundKeys):
 
 roundKeys = [0xa4c, 0x2ea, 0x9a, 0x129, 0xcc2]
 
-cipherInput = 0xabc1f1 #kazda cast musi bejt mod p
-
-encrypted = encryptFeistel(cipherInput, roundKeys)
-
-print(hex(encrypted))
-
-
-decrypted = decryptFeistel(encrypted, roundKeys[::-1])
-
-print(hex(decrypted))
-print('------')
-
 # attack
 
 a = 0xb54
 b = 0xc11
 
 rightVal = (2 * a * b) % p
-
-print(hex(rightVal))
-
-#P1 = 0x19c254 # 
-#P1 = randrange(0,0x1000000)
 
 
 def doAttack(previousCandidates):
@@ -118,15 +101,12 @@ def doAttack(previousCandidates):
                     newCandidates[k5Guess].append(k4Guess)
                 else:
                     newCandidates[k5Guess] = [k4Guess]
-                
-        print(k5Guess)
     return newCandidates
 
 
 candidates1 = doAttack(None)
-
-print(candidates1)
-
 candidates2 = doAttack(candidates1)
+#candidates2 should have only one candidate key pair
 
-print(candidates2)
+for candidate in candidates2:
+    print('k4:', hex(candidates2[candidate][0]), 'k5:', hex(candidate))
