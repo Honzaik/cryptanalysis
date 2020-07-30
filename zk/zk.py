@@ -123,10 +123,9 @@ C2 = encryptFeistel(P2, roundKeys)
 C3 = encryptFeistel(P3, roundKeys)
 C4 = encryptFeistel(P4, roundKeys)
 
-k5Guess = 0xcc21
+candidates = {}
 
 for k5Guess in range(0,0x10000):
-
     D1 = feistelRound(C1, k5Guess, False)
     D2 = feistelRound(C2, k5Guess, False)
     D3 = feistelRound(C3, k5Guess, False)
@@ -153,5 +152,11 @@ for k5Guess in range(0,0x10000):
 
         leftVal = (temp-(t1+t4-t2-t3))%p
    #    leftVal = (D1L-t1-(D2L-t2)-(D3L-t3)+(D4L-t4))%p
-        if (rightVal == leftVal):
-            print(hex(k4Guess), hex(k5Guess))
+        if (rightVal == leftVal)
+            '''if (k5Guess in candidates):
+                candidates[k5Guess].append(k4Guess)
+            else:
+                candidates[k5Guess] = [k4Guess]
+            '''
+    print(k5Guess)
+
